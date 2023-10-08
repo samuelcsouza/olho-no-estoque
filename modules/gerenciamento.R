@@ -186,6 +186,7 @@ gerenciamento_server <- function(input, output, session, font_size) {
   })
   
   
+  
   observeEvent(input$new_update, {
     
     selected_row <- input$table_product_list_rows_selected
@@ -320,6 +321,7 @@ gerenciamento_server <- function(input, output, session, font_size) {
   })
   
   
+  
   output$tbl_sell_product <- renderDataTable({
     
     selected_row <- input$table_product_list_rows_selected
@@ -402,7 +404,7 @@ gerenciamento_server <- function(input, output, session, font_size) {
     
   })
   
-  
+  #### - - - - - - - - - - - - - - - - UI - - - - - - - - - - - - - - - - - - - - ####
   
   output$manager_ui <- renderUI({
     

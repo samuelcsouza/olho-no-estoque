@@ -44,18 +44,24 @@ sidebar <- dashboardSidebar(
       icon    = icon('gears', verify_fa = FALSE)
     ),
     
-    actionButton(
-      inputId = 'btn_plus',
-      label = '+',
-      icon = icon('font'),
-      width = '100%'
-    ),
-    
-    actionButton(
-      inputId = 'btn_less',
-      label = '-',
-      icon = icon('font'),
-      width = '100%'
+    div(
+      align = "center",
+      
+      br(),
+      
+      actionButton(
+        inputId = 'btn_plus',
+        label = '+',
+        icon = icon('font'),
+        width = '100%'
+      ) %>% column(width = 5),
+      
+      actionButton(
+        inputId = 'btn_less',
+        label = '-',
+        icon = icon('font'),
+        width = '100%'
+      ) %>% column(width = 5)
     )
     
   )
@@ -90,7 +96,12 @@ server <- function(input, output, session) {
   })
   
   observeEvent(input$btn_less, {
+    
     FONT_SIZE <<- FONT_SIZE - 2
+    
+    if(FONT_SIZE <= 0) {
+      FONT_SIZE <<- 2
+    }
     
     update_font$data <- FONT_SIZE
   })
