@@ -7,6 +7,7 @@ suppressMessages({
   library(DT)
   library(plotly)
   library(stringr)
+  library(httr)
 })
 
 
