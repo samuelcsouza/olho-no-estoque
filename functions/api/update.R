@@ -1,4 +1,4 @@
-update_product <- function(id){
+update_product <- function(id, new_product){
   
   api_url = Sys.getenv("API_URL")
   
@@ -6,7 +6,7 @@ update_product <- function(id){
     url = paste0(
       api_url, '/edit/', id
     ),
-    body = as.list(product),
+    body = as.list(new_product),
     encode = "json"
   )
   
