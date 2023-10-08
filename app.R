@@ -21,6 +21,11 @@ sapply(
   source
 )
 
+sapply(
+  list.files(path = "functions/", full.names = TRUE, recursive = TRUE),
+  source
+)
+
 sidebar <- dashboardSidebar(
   
   sidebarMenu(
