@@ -190,7 +190,8 @@ gerenciamento_server <- function(input, output, session, font_size) {
     
     selected_row <- input$table_product_list_rows_selected
     
-    product_to_update <- products()[selected_row, ]
+    product_to_update <- products()[selected_row, ] %>% 
+      head(1)
     
     upt <- tibble(
       id          = product_to_update$id,
@@ -217,7 +218,8 @@ gerenciamento_server <- function(input, output, session, font_size) {
     
     selected_row <- input$table_product_list_rows_selected
     
-    product_to_update <- products()[selected_row, ]
+    product_to_update <- products()[selected_row, ] %>% 
+      head(1)
     
     showModal(
       modalDialog(
