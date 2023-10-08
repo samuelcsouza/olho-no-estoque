@@ -30,16 +30,18 @@ sidebar <- dashboardSidebar(
   
   shinyjs::useShinyjs(),
   
+  minified = FALSE,
+  
   sidebarMenu(
     
-    menuItem(
-      text    = "Início",
-      tabName = "home",    
-      icon    = icon("home")
-    ),
+    # menuItem(
+    #   text    = "Início",
+    #   tabName = "home",    
+    #   icon    = icon("home")
+    # ),
     
     menuItem(
-      text    = "Gerenciamento",
+      text    = "Estoque",
       tabName = "gerenciamento",    
       icon    = icon('gears', verify_fa = FALSE)
     ),
@@ -70,7 +72,7 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tabItems(
     
-    tabItem(tabName = "home", inicio_ui('home')),
+    # tabItem(tabName = "home", inicio_ui('home')),
     tabItem(tabName = 'gerenciamento', gerenciamento_ui('gerenciamento'))
     
   )
@@ -106,7 +108,7 @@ server <- function(input, output, session) {
     update_font$data <- FONT_SIZE
   })
   
-  callModule(inicio_server, 'home', font_size = reactive(update_font$data))
+  # callModule(inicio_server, 'home', font_size = reactive(update_font$data))
   callModule(gerenciamento_server, 'gerenciamento', font_size = reactive(update_font$data))
   
 }

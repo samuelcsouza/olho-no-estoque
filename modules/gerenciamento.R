@@ -7,33 +7,7 @@ gerenciamento_ui <- function(id) {
 gerenciamento_server <- function(input, output, session, font_size) {
   ns <- session$ns
   
-  #### - - - - - - - - - - - - - - - - INFO CARDS - - - - - - - - - - - - - - - - ####
-  
-  total_itens <- reactive({
-    
-    input$btn_update
-    
-    nrow(
-      list_products()
-    )
-    
-  })
-  
-  total_value <- reactive({
-    
-    input$btn_update
-    
-    list_products() %>% 
-      pull(value) %>% 
-      sum() %>% 
-      round(2) %>% 
-      paste0("R$ ", .)
-    
-  })
-  
-  #### - - - - - - - - - - - - - - - - INFO BOX - - - - - - - - - - - - - - - - - ####
-  
-  products <- reactive({
+  all_products <- reactive({
     
     input$btn_update
     
@@ -41,7 +15,55 @@ gerenciamento_server <- function(input, output, session, font_size) {
     
   })
   
+  #### - - - - - - - - - - - - - - - - INFO CARDS - - - - - - - - - - - - - - - - ####
+  
+  total_itens <- reactive({
+    
+    nrow(
+      all_products()
+    )
+    
+  })
+  
+  total_value <- reactive({
+    
+    products <- all_products()
+    
+    .sum <- 0.0
+    
+    if(nrow(products) != 0){
+      .sum <- list_products() %>% 
+        pull(value) %>% 
+        sum() %>% 
+        round(2)
+    }
+    
+    paste0("R$ ", .sum)
+    
+  })
+  
+  #### - - - - - - - - - - - - - - - - INFO BOX - - - - - - - - - - - - - - - - - ####
+  
+  products <- reactive({
+    
+    all_products()
+    
+  })
+  
   output$table_product_list <- renderDataTable({
+    
+    shinyjs::disable('btn_update_product')
+    shinyjs::disable('btn_sell_product')
+
+    shiny::validate(
+      shiny::need(
+        nrow(products()) > 0, 
+        'Nenhum produto cadastrado!'
+      )
+    )
+    
+    shinyjs::enable('btn_update_product')
+    shinyjs::enable('btn_sell_product')
     
     .colnames <- c(
       "ID",
