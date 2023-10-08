@@ -2,7 +2,7 @@ suppressMessages({
   library(dplyr)
   library(shiny)
   library(shinydashboard)
-  library(shinydashboardPlus)
+  library(shinyjs)
   library(htmltools)
   library(DT)
   library(plotly)
@@ -27,6 +27,8 @@ sapply(
 )
 
 sidebar <- dashboardSidebar(
+  
+  shinyjs::useShinyjs(),
   
   sidebarMenu(
     
